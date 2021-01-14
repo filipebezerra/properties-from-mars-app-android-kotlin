@@ -6,5 +6,5 @@ import retrofit2.http.GET
 const val MARS_BASE_API_URL = "https://mars.udacity.com/"
 
 interface MarsApiService {
-    @GET("realestate") fun getProperties(): Call<List<MarsPropertyNetwork>>
+    @GET("realestate") suspend fun getProperties(): List<MarsPropertyNetwork>
 }
