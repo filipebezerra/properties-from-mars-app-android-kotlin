@@ -16,7 +16,7 @@ data class MarsPropertyNetwork(
 fun List<MarsPropertyNetwork>.toDomainModels() = map {
     MarsProperty(
         id = it.id,
-        type = PropertyType.valueOf(it.type),
+        type = PropertyType.values().find { it.type == it.type }!!,
         price = it.price.toDouble(),
         imageUrl = it.imageSrc,
     )
