@@ -18,6 +18,15 @@ fun ImageView.bindImageUrl(imageUrl: String?) = imageUrl?.let { url ->
         .into(this)
 }
 
+@BindingAdapter("imageContentDescription")
+fun ImageView.bindImageContentDescription(marsProperty: MarsProperty?) = marsProperty?.let { property ->
+    contentDescription = context.getString(
+        R.string.property_image_content_description,
+        property.type.type,
+        property.price
+    )
+}
+
 @BindingAdapter("propertiesList")
 fun RecyclerView.bindPropertiesList(propertiesList: List<MarsProperty>?) = propertiesList?.let { list ->
     (adapter as MarsPropertyAdapter).submitList(list)

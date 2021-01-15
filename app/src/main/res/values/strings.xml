@@ -12,4 +12,5 @@
     <string name="unsuccessful_get_properties_response">
         Something goes wrong trying to load properties. Try again!
     </string>
+    <string name="property_image_content_description">Property avaiable for %1$s for %2$f</string>
 </resources>

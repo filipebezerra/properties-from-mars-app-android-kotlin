@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:bind="http://schemas.android.com/apk/res-auto"
+    tools:showIn="@layout/properties_screen"
     >
 
     <data>
@@ -20,12 +20,14 @@
         <ImageView
             android:id="@+id/property_image"
             android:layout_width="match_parent"
-            android:layout_height="170dp"
+            android:layout_height="@dimen/property_image_height"
+            android:layout_margin="@dimen/smallest_spacing"
             android:scaleType="centerCrop"
             android:adjustViewBounds="true"
-            android:contentDescription="TODO"
             bind:imageUrl="@{property.imageUrl}"
+            bind:imageContentDescription="@{property}"
             tools:srcCompat="@tools:sample/backgrounds/scenic"
+            tools:ignore="ContentDescription"
             />
     </FrameLayout>
 </layout>
