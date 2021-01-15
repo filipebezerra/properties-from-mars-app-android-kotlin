@@ -40,7 +40,6 @@ class PropertiesScreen : Fragment() {
             viewLifecycleOwner,
             viewModel.snackbarTextResource,
             Snackbar.LENGTH_LONG,
-            binding.propertiesRoot,
         )
         with(binding) {
             propertiesList.adapter = MarsPropertyAdapter()

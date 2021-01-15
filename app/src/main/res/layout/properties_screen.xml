@@ -13,7 +13,7 @@
             />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <FrameLayout
         android:id="@+id/properties_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -21,8 +21,8 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/properties_list"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:padding="6dp"
             android:clipToPadding="false"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -32,7 +32,146 @@
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="2"
             bind:propertiesList="@{viewModel.properties}"
+            bind:loadStatus="@{viewModel.loadStatus}"
             tools:listitem="@layout/property_item"
             />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/properties_loading_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            bind:loadStatus="@{viewModel.loadStatus}"
+            app:shimmer_duration="1200"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:orientation="vertical"
+                >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:baselineAligned="false"
+                    >
+                    <include
+                        layout="@layout/property_list_item_placeholder"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        />
+
+                    <include
+                        layout="@layout/property_list_item_placeholder"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:baselineAligned="false"
+                    >
+                    <include
+                        layout="@layout/property_list_item_placeholder"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        />
+
+                    <include
+                        layout="@layout/property_list_item_placeholder"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:baselineAligned="false"
+                    >
+                    <include
+                        layout="@layout/property_list_item_placeholder"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        />
+
+                    <include
+                        layout="@layout/property_list_item_placeholder"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/properties_load_error_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/large_spacing"
+            bind:loadStatus="@{viewModel.loadStatus}"
+            >
+
+            <ImageView
+                android:id="@+id/no_network_image"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_gravity="center"
+                android:contentDescription="@string/error_loading_image_content_description"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_connection_error"
+                app:tint="?attr/colorPrimary"
+                />
+
+            <TextView
+                android:id="@+id/offline_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/normal_spacing"
+                android:text="@string/offline_text"
+                android:textAppearance="?attr/textAppearanceHeadline5"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/no_network_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/no_network_image"
+                />
+
+            <TextView
+                android:id="@+id/help_text_offline_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/normal_spacing"
+                android:text="@string/help_text_offline_text"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/offline_text"
+                app:layout_constraintTop_toBottomOf="@+id/offline_text"
+                />
+
+            <Button
+                android:id="@+id/try_load_again_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/try_again_now"
+                android:contentDescription="@string/try_load_again_content_description"
+                android:onClick="@{() -> viewModel.tryLoadAgain()}"
+                app:layout_constraintTop_toBottomOf="@+id/help_text_offline_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
 </layout>

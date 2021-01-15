@@ -3,4 +3,5 @@
     <dimen name="normal_spacing">16dp</dimen>
     <dimen name="property_image_height">170dp</dimen>
     <dimen name="smallest_spacing">2dp</dimen>
+    <dimen name="large_spacing">32dp</dimen>
 </resources>

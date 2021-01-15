@@ -13,4 +13,12 @@
         Something goes wrong trying to load properties. Try again!
     </string>
     <string name="property_image_content_description">Property avaiable for %1$s for %2$f</string>
+    <string name="offline_text">Houston, we have a problem</string>
+    <string name="help_text_offline_text">
+        Your network seems to be unavailable, we couldn\'t load data from the internet.
+        Check your data or wifi connection and try again!
+    </string>
+    <string name="error_loading_image_content_description">Error loading asteroids data from the internet image</string>
+    <string name="try_again_now">Try again now</string>
+    <string name="try_load_again_content_description">Try to load properties again</string>
 </resources>

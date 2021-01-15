@@ -22,17 +22,26 @@ class PropertiesViewModel(private val marsApiService: MarsApiService) : ViewMode
     val snackbarTextResource: LiveData<Event<Int>>
         get() = _snackbarTextResource
 
+    private val _loadStatus = MutableLiveData<MarsApiStatus>()
+    val loadStatus: LiveData<MarsApiStatus>
+        get() = _loadStatus
+
     init {
         loadProperties()
     }
 
+    fun tryLoadAgain() = loadProperties()
+
     private fun loadProperties() {
         viewModelScope.launch {
+            _loadStatus.value = MarsApiStatus.LOADING
             try {
                 handleGetPropertiesResponse(marsApiService.getProperties())
             } catch (error: HttpException) {
+                _loadStatus.value = MarsApiStatus.ERROR
                 handleGetPropertiesHttpFailure(error)
             } catch (error: Exception) {
+                _loadStatus.value = MarsApiStatus.ERROR
                 handleGetPropertiesFailure(error)
             }
         }
@@ -40,6 +49,7 @@ class PropertiesViewModel(private val marsApiService: MarsApiService) : ViewMode
 
     private fun handleGetPropertiesResponse(properties: List<MarsPropertyNetwork>) {
         _properties.value = properties.toDomainModels()
+        _loadStatus.value = MarsApiStatus.DONE
     }
 
     private fun handleGetPropertiesHttpFailure(error: HttpException) {
