@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment"
+    app:startDestination="@id/properties_screen"
     >
 
     <fragment
-        android:id="@+id/FirstFragment"
+        android:id="@+id/properties_screen"
         android:name="dev.filipebezerra.app.propertiesfrommars.properties.PropertiesScreen"
-        android:label="@string/first_fragment_label"
+        android:label="@string/properties_fragment_label"
         tools:layout="@layout/properties_screen"
         >
 
@@ -27,7 +27,7 @@
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment"
+            app:destination="@id/properties_screen"
             />
     </fragment>
 </navigation>

@@ -4,6 +4,8 @@ import androidx.lifecycle.*
 import dev.filipebezerra.app.propertiesfrommars.R
 import dev.filipebezerra.app.propertiesfrommars.datasource.remote.MarsApiService
 import dev.filipebezerra.app.propertiesfrommars.datasource.remote.MarsPropertyNetwork
+import dev.filipebezerra.app.propertiesfrommars.datasource.remote.toDomainModels
+import dev.filipebezerra.app.propertiesfrommars.domain.MarsProperty
 import dev.filipebezerra.app.propertiesfrommars.util.event.Event
 import dev.filipebezerra.app.propertiesfrommars.util.ext.postEvent
 import kotlinx.coroutines.launch
@@ -12,8 +14,8 @@ import timber.log.Timber
 
 class PropertiesViewModel(private val marsApiService: MarsApiService) : ViewModel() {
 
-    private val _properties = MutableLiveData<String>()
-    val properties: LiveData<String>
+    private val _properties = MutableLiveData<List<MarsProperty>>()
+    val properties: LiveData<List<MarsProperty>>
         get() = _properties
 
     private val _snackbarTextResource = MutableLiveData<Event<Int>>()
@@ -37,7 +39,7 @@ class PropertiesViewModel(private val marsApiService: MarsApiService) : ViewMode
     }
 
     private fun handleGetPropertiesResponse(properties: List<MarsPropertyNetwork>) {
-        _properties.value = "We got ${properties.size} properties available right now!"
+        _properties.value = properties.toDomainModels()
     }
 
     private fun handleGetPropertiesHttpFailure(error: HttpException) {

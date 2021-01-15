@@ -1,15 +1,15 @@
 package dev.filipebezerra.app.propertiesfrommars.properties
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import dev.filipebezerra.app.propertiesfrommars.R
+import com.google.android.material.snackbar.Snackbar
 import dev.filipebezerra.app.propertiesfrommars.ServiceLocator
 import dev.filipebezerra.app.propertiesfrommars.databinding.PropertiesScreenBinding
+import dev.filipebezerra.app.propertiesfrommars.util.ext.setupSnackbar
 
 class PropertiesScreen : Fragment() {
 
@@ -33,6 +33,19 @@ class PropertiesScreen : Fragment() {
             lifecycleOwner = viewLifecycleOwner
         }
         .root
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        view.setupSnackbar(
+            viewLifecycleOwner,
+            viewModel.snackbarTextResource,
+            Snackbar.LENGTH_LONG,
+            binding.propertiesRoot,
+        )
+        with(binding) {
+            propertiesList.adapter = MarsPropertyAdapter()
+        }
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
