@@ -5,29 +5,26 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/properties_screen"
     >
-
     <fragment
         android:id="@+id/properties_screen"
         android:name="dev.filipebezerra.app.propertiesfrommars.properties.PropertiesScreen"
-        android:label="@string/properties_fragment_label"
+        android:label="@string/properties_screen_label"
         tools:layout="@layout/properties_screen"
         >
-
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment"
+            android:id="@+id/action_properties_screen_to_property_detail_screen"
+            app:destination="@id/property_detail_screen"
             />
     </fragment>
-    <fragment
-        android:id="@+id/SecondFragment"
+    <dialog
+        android:id="@+id/property_detail_screen"
         android:name="dev.filipebezerra.app.propertiesfrommars.propertydetail.PropertyDetailScreen"
-        android:label="@string/second_fragment_label"
+        android:label="@string/property_detail_screen_label"
         tools:layout="@layout/property_detail_screen"
         >
-
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/properties_screen"
+        <argument
+            android:name="property"
+            app:argType="dev.filipebezerra.app.propertiesfrommars.domain.MarsProperty"
             />
-    </fragment>
+    </dialog>
 </navigation>

@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import dev.filipebezerra.app.propertiesfrommars.ServiceLocator
 import dev.filipebezerra.app.propertiesfrommars.databinding.PropertiesScreenBinding
@@ -22,6 +24,8 @@ class PropertiesScreen : Fragment() {
     private val viewModel: PropertiesViewModel by viewModels{
         PropertiesViewModel.factory(ServiceLocator.proviceMarsApiService())
     }
+
+    private val navController: NavController by lazy { findNavController() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,7 +46,10 @@ class PropertiesScreen : Fragment() {
             Snackbar.LENGTH_LONG,
         )
         with(binding) {
-            propertiesList.adapter = MarsPropertyAdapter()
+            propertiesList.adapter = MarsPropertyAdapter(MarsPropertyItemListener { propertyTapped ->
+              navController.navigate(PropertiesScreenDirections
+                  .actionPropertiesScreenToPropertyDetailScreen(propertyTapped))
+            })
         }
     }
 

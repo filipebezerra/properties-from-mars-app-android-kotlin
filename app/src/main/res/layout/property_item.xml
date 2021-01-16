@@ -10,17 +10,22 @@
             name="property"
             type="dev.filipebezerra.app.propertiesfrommars.domain.MarsProperty"
             />
+        <variable
+            name="listener"
+            type="dev.filipebezerra.app.propertiesfrommars.properties.MarsPropertyItemListener"
+            />
     </data>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="@{() -> listener.onPropertyItemTap(property)}"
         >
 
         <ImageView
             android:id="@+id/property_image"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/property_image_height"
+            android:layout_height="@dimen/property_image_size"
             android:layout_margin="@dimen/smallest_spacing"
             android:scaleType="centerCrop"
             android:adjustViewBounds="true"

@@ -9,13 +9,14 @@ import dev.filipebezerra.app.propertiesfrommars.databinding.PropertyItemBinding
 import dev.filipebezerra.app.propertiesfrommars.databinding.PropertyItemBinding.inflate
 import dev.filipebezerra.app.propertiesfrommars.domain.MarsProperty
 
-class MarsPropertyAdapter :
-    ListAdapter<MarsProperty, MarsPropertyViewHolder>(MarsPropertyItemCallback) {
+class MarsPropertyAdapter(
+    private val itemListener: MarsPropertyItemListener,
+) : ListAdapter<MarsProperty, MarsPropertyViewHolder>(MarsPropertyItemCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         MarsPropertyViewHolder.createFrom(parent)
 
     override fun onBindViewHolder(holder: MarsPropertyViewHolder, position: Int) =
-        holder.bindTo(getItem(position))
+        holder.bindTo(getItem(position), itemListener)
 }
 
 object MarsPropertyItemCallback : DiffUtil.ItemCallback<MarsProperty>() {
@@ -29,8 +30,12 @@ object MarsPropertyItemCallback : DiffUtil.ItemCallback<MarsProperty>() {
 class MarsPropertyViewHolder private constructor(
     private val itemViewBinding: PropertyItemBinding
 ) : RecyclerView.ViewHolder(itemViewBinding.root) {
-    fun bindTo(item: MarsProperty) = with(itemViewBinding) {
+    fun bindTo(
+        item: MarsProperty,
+        itemListener: MarsPropertyItemListener
+    ) = with(itemViewBinding) {
         property = item
+        listener = itemListener
         executePendingBindings()
     }
 
@@ -39,4 +44,8 @@ class MarsPropertyViewHolder private constructor(
             inflate(from(parent.context), parent, false)
         )
     }
+}
+
+class MarsPropertyItemListener(private val listener: (marsProperty: MarsProperty) -> Unit) {
+    fun onPropertyItemTap(marsProperty: MarsProperty) = listener.invoke(marsProperty)
 }

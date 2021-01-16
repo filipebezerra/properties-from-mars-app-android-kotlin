@@ -1,7 +1,13 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="normal_spacing">16dp</dimen>
-    <dimen name="property_image_height">170dp</dimen>
+    <dimen name="property_image_size">170dp</dimen>
+    <dimen name="min_button_size">56dp</dimen>
+
+    <!-- Grid spacing -->
     <dimen name="smallest_spacing">2dp</dimen>
-    <dimen name="large_spacing">32dp</dimen>
+    <dimen name="smaller_spacing">4dp</dimen>
+    <dimen name="small_spacing">8dp</dimen>
+    <dimen name="normal_spacing">16dp</dimen>
+    <dimen name="large_spacing">24dp</dimen>
+    <dimen name="larger_spacing">32dp</dimen>
 </resources>

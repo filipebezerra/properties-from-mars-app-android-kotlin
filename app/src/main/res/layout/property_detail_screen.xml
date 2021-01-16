@@ -1,38 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".propertydetail.PropertyDetailScreen"
     >
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="dev.filipebezerra.app.propertiesfrommars.propertydetail.PropertyDetailViewModel"
+            />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/property_detail_root"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/normal_spacing"
+        tools:background="?attr/colorSurface"
         >
-
-        <TextView
-            android:id="@+id/textview_second"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@id/button_second"
-            app:layout_constraintEnd_toEndOf="parent"
+        <ImageView
+            android:id="@+id/property_image"
+            android:layout_width="@dimen/property_image_size"
+            android:layout_height="@dimen/property_image_size"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            bind:imageUrl="@{viewModel.property.imageUrl}"
+            bind:imageContentDescription="@{viewModel.property}"
+            tools:srcCompat="@tools:sample/backgrounds/scenic"
+            tools:ignore="ContentDescription"
+            />
+
+        <TextView
+            android:id="@+id/property_type"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/normal_spacing"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/property_image"
+            app:layout_constraintTop_toTopOf="parent"
+            bind:propertyType="@{viewModel.property.type}"
+            tools:text="For Rent"
+            />
+
+        <TextView
+            android:id="@+id/property_price"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small_spacing"
+            android:textAppearance="?attr/textAppearanceBody2"
+            app:layout_constraintStart_toStartOf="@+id/property_type"
+            app:layout_constraintTop_toBottomOf="@+id/property_type"
+            app:layout_constraintEnd_toEndOf="@+id/property_type"
+            bind:propertyPrice="@{viewModel.property.price}"
+            tools:text="Price: $ 500"
             />
 
         <Button
-            android:id="@+id/button_second"
+            android:id="@+id/take_property_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small_spacing"
+            android:contentDescription="@string/take_property_content_description"
+            android:minHeight="@dimen/min_button_size"
+            android:text="@string/take_this_property"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/purple_500"
+            app:layout_constraintEnd_toEndOf="@+id/property_image"
+            app:layout_constraintStart_toStartOf="@+id/property_image"
+            app:layout_constraintTop_toBottomOf="@+id/property_image"
+            />
+
+        <Button
+            android:id="@+id/share_property_button"
+            style="@style/Widget.PropertiesAreFromMars.Button.OutlinedButton.IconOnly"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/previous"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:minWidth="@dimen/min_button_size"
+            android:minHeight="@dimen/min_button_size"
+            app:layout_constraintBottom_toBottomOf="@+id/take_property_button"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textview_second"
+            app:icon="@drawable/ic_twotone_share_24"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

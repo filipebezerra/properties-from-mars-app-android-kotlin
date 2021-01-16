@@ -1,14 +1,11 @@
 <resources>
     <string name="app_name">Properties are from Mars</string>
     <string name="action_settings">Settings</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="properties_fragment_label">Properties available</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="properties_screen_label">Properties available</string>
+    <string name="property_detail_screen_label">Property detail</string>
+
     <string name="unsuccessful_get_properties_response">
         Something goes wrong trying to load properties. Try again!
     </string>
@@ -21,4 +18,8 @@
     <string name="error_loading_image_content_description">Error loading asteroids data from the internet image</string>
     <string name="try_again_now">Try again now</string>
     <string name="try_load_again_content_description">Try to load properties again</string>
+    <string name="take_property_content_description">Take this property</string>
+    <string name="take_this_property">Take this Property</string>
+    <string name="property_type_format">For %1$s</string>
+    <string name="property_price_format">Price: $ %1$.0f</string>
 </resources>

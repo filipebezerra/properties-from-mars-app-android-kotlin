@@ -13,7 +13,20 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
         
-        <item name="colorOnSurface">@color/purple_500</item>
+        <item name="colorSurface">@color/black</item>
+        <item name="colorOnSurface">@color/white</item>
+
+        <item name="bottomSheetDialogTheme">@style/ThemeOverlay.PropertiesAreFromMars.BottomSheetDialog</item>
+
+        <item name="fontFamily">@font/raleway_medium</item>
+        <item name="android:fontFamily">@font/raleway_medium</item>
+    </style>
+
+    <style name="ThemeOverlay.PropertiesAreFromMars.BottomSheetDialog" parent="ThemeOverlay.MaterialComponents.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowAnimationStyle">@style/Animation.MaterialComponents.BottomSheetDialog</item>
+        <item name="bottomSheetStyle">@style/Widget.MaterialComponents.BottomSheet.Modal</item>
+        <item name="android:textColorPrimary">@color/white</item>
     </style>
 
     <style name="Theme.PropertiesAreFromMars.NoActionBar">

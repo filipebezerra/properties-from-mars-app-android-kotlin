@@ -1,18 +1,17 @@
 package dev.filipebezerra.app.propertiesfrommars.propertydetail
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
-import dev.filipebezerra.app.propertiesfrommars.R
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dev.filipebezerra.app.propertiesfrommars.databinding.PropertyDetailScreenBinding
+import dev.filipebezerra.app.propertiesfrommars.databinding.PropertyDetailScreenBinding.inflate
+import dev.filipebezerra.app.propertiesfrommars.propertydetail.PropertyDetailViewModel.Companion.factory
 
-/**
- * A simple [Fragment] subclass as the second destination in the navigation.
- */
-class PropertyDetailScreen : Fragment() {
+class PropertyDetailScreen : BottomSheetDialogFragment() {
 
     private var _binding: PropertyDetailScreenBinding? = null
 
@@ -20,21 +19,20 @@ class PropertyDetailScreen : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    private val arguments: PropertyDetailScreenArgs by navArgs()
+
+    private val viewModel: PropertyDetailViewModel by viewModels{ factory(arguments.property) }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        _binding = PropertyDetailScreenBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        binding.buttonSecond.setOnClickListener {
-            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+    ): View = inflate(inflater, container, false)
+        .apply {
+            _binding = this
+            viewModel = this@PropertyDetailScreen.viewModel
+            lifecycleOwner = viewLifecycleOwner
         }
-    }
+        .root
 
     override fun onDestroyView() {
         super.onDestroyView()
